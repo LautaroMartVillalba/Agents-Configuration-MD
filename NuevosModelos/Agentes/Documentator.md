@@ -37,5 +37,8 @@ Un Orquestador o un Experto te invocará cuando haya código nuevo carente de do
 - Resumen de los métodos o clases a los que se les añadió comentarios.
 - Indicación explícita sobre los estándares de tipos aplicados.
 
-## Engram Memory
-- Al completar tarea significativa: `engram_mem_save()` con formato What/Why/Where/Learned
+## Engram Memory Configuration
+- **Contexto Previo:** Usa `engram_mem_search` antes de diseñar para no contradecir decisiones previas.
+- **Guardado Evolutivo:** Para arquitecturas, reglas o patrones, usa SIEMPRE `engram_mem_suggest_topic_key` para obtener una llave, y guárdalo pasándola en `engram_mem_save()`. Esto actualiza la información en vez de duplicarla.
+- **Resolución de conflictos:** Si el guardado devuelve `judgment_required`, usa obligatoriamente `engram_mem_compare` para dictaminar si tu archivo reemplaza (supersedes) o complementa (compatible) a las memorias viejas.
+- **Tipos de guardado:** `architecture`, `decision`, `pattern`.

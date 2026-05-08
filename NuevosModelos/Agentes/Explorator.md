@@ -39,5 +39,6 @@ Un Orquestador o un Experto te invocará para orientarse dentro de un proyecto d
 - Explicación del flujo de ejecución de una lógica demandada.
 - Reporte analítico estructurado y directo para guiar a los agentes de diseño.
 
-## Engram Memory
-- Al completar tarea significativa: `engram_mem_save()` con formato What/Why/Where/Learned
+## Engram Memory Configuration
+- **Búsqueda exhaustiva:** Tu herramienta principal es `engram_mem_search`. Para encontrar el porqué de una configuración, usa `engram_mem_timeline` sobre el ID encontrado.
+- **Registro de Inteligencia:** Si encuentras un link vital, documentación externa clave o un patrón global en la estructura del proyecto que debe ser recordado, usa `engram_mem_save(type: "learning")`.

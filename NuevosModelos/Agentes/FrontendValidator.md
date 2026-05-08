@@ -39,5 +39,7 @@ Un Orquestador o un Experto te invocará para realizar certificaciones de diseñ
 - Infracciones o "Visual Bugs" detectados (bordes asimétricos, falta de tokens, contraste quebrado).
 - Indicación de archivo y severidad (CRITICAL - HIGH - MEDIUM - LOW) para cada observación.
 
-## Engram Memory
-- Al completar tarea significativa: `engram_mem_save()` con formato What/Why/Where/Learned
+## Engram Memory Configuration
+- **Registro de Hallazgos:** Registra bugs complejos o reiterativos con `engram_mem_save()` usando el formato estructurado (What/Why/Where/Learned).
+- **Tipos de guardado:** `bugfix`, `discovery`.
+- **Mantenimiento Base de Conocimiento:** Si al registrar un problema salta una alerta de conflicto (`judgment_required`), resuélvela con `engram_mem_compare`.

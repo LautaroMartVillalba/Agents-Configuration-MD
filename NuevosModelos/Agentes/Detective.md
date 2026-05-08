@@ -39,5 +39,6 @@ Un Orquestador o un Experto te invocará cuando se enfrenten a un bug exótico a
 - Listado de alternativas, snippets recomendados u opciones viables.
 - Exclusión total de redundancias reflexivas.
 
-## Engram Memory
-- Al completar una búsqueda útil: `engram_mem_save()` registrando el enlace o librería en el formato What/Why/Where/Learned (especialmente si corrige un caso estructural).
+## Engram Memory Configuration
+- **Búsqueda exhaustiva:** Tu herramienta principal es `engram_mem_search`. Para encontrar el porqué de una configuración, usa `engram_mem_timeline` sobre el ID encontrado.
+- **Registro de Inteligencia:** Si encuentras un link vital, documentación externa clave o un patrón global en la estructura del proyecto que debe ser recordado, usa `engram_mem_save(type: "learning")`.

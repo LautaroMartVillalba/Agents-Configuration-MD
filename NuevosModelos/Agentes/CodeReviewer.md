@@ -42,5 +42,7 @@ Un Orquestador o un Experto te invocará cuando necesite verificar la consistenc
 - Archivo o lista de archivos directamente relacionados
 - Nivel de urgencia (CRITICAL - HIGH - MEDIUM - LOW)
 
-## Engram Memory
-- Al completar tarea significativa: `engram_mem_save()` con formato What/Why/Where/Learned
+## Engram Memory Configuration
+- **Registro de Hallazgos:** Registra bugs complejos o reiterativos con `engram_mem_save()` usando el formato estructurado (What/Why/Where/Learned).
+- **Tipos de guardado:** `bugfix`, `discovery`.
+- **Mantenimiento Base de Conocimiento:** Si al registrar un problema salta una alerta de conflicto (`judgment_required`), resuélvela con `engram_mem_compare`.

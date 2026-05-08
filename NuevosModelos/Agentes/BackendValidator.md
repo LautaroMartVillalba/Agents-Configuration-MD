@@ -39,5 +39,7 @@ Un Orquestador o un Experto te invocará cuando necesite certificar que la imple
 - Análisis de mantenibilidad y cobertura de casos límite (Edge cases).
 - Sugerencias concretas de solución sin editar los archivos directamente.
 
-## Engram Memory
-- Al completar tarea significativa: `engram_mem_save()` con formato What/Why/Where/Learned
+## Engram Memory Configuration
+- **Registro de Hallazgos:** Registra bugs complejos o reiterativos con `engram_mem_save()` usando el formato estructurado (What/Why/Where/Learned).
+- **Tipos de guardado:** `bugfix`, `discovery`.
+- **Mantenimiento Base de Conocimiento:** Si al registrar un problema salta una alerta de conflicto (`judgment_required`), resuélvela con `engram_mem_compare`.
