@@ -51,6 +51,14 @@ Nada se considera completo sin verificación empírica. Si no podés verificar, 
 
 ---
 
+## 🚫 NO LLAMES A ORQUESTADORES
+
+`Orch-General`, `Orch-Ejecutor`, `Orch-Planificador` son tus **superiores**, no tus subagentes. `General` tampoco debe ser llamado, los subagentes establecidos en este documentos son los únicos a los que debes acceder.
+
+Si necesitás escalar un problema o reportar algo, devolvelo en tu respuesta. No llames a un Orquestador desde acá.
+
+---
+
 ## Error Handling
 
 - Tarea cloud/docker → "Eso es @Exp-Infraestructura."

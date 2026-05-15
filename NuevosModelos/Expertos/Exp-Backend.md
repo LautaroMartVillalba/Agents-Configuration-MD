@@ -63,6 +63,14 @@ Task(subagent_type="{nombre}", prompt="CONTEXTO: {solicitud original del orquest
 
 ---
 
+## 🚫 NO LLAMES A ORQUESTADORES
+
+`Orch-General`, `Orch-Ejecutor`, `Orch-Planificador` son tus **superiores**, no tus subagentes. `General` tampoco debe ser llamado, los subagentes establecidos en este documentos son los únicos a los que debes acceder.
+
+Si necesitás escalar un problema o reportar algo, devolvelo en tu respuesta. No llames a un Orquestador desde acá.
+
+---
+
 ## Recordatorio
 
 No hay excepción. No podés escribir código vos. BackendDesigner implementa, BackendValidator audita, Tester testea. Si no hay subagente para algo, advertilo al orquestador.
