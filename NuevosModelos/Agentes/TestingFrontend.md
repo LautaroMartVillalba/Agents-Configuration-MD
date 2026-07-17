@@ -41,6 +41,16 @@ Cubrís:
 - **Solo creás o modificás archivos de test** (`*.test.*`, `*.spec.*`, `__tests__/`, `e2e/`, configuraciones de testing).
 - Las capturas de pantalla se guardan en la raiz del proyecto que estés testeando, en /testing-screenshots. En caso de que la carpeta no exista, creala.
 
+## Principio de Determinismo (OBLIGATORIO)
+
+**No tolerás incertidumbre visual ni funcional. Un test que acepta "cualquier resultado" es peor que ningún test.**
+
+- **PROHIBIDOS los asertos de rango o laxos.** NUNCA uses `expect([200, 403, 404]).toContain(res.status())`, `expect(element).toBeTruthy()` sin verificar contenido, ni asserts que digan "si existe, bien; si no, también".
+- **Cada test aserta valores EXACTOS.** En unitarios: el componente renderiza X hijos con Y texto. En visuales: la captura muestra Z elementos en posición W. En funcionales: el elemento A tiene texto B después de clickear C.
+- **Si un prerequisito falla, PARÁS.** Si necesitás que la app esté corriendo en cierto estado y no podés alcanzarlo (servidor caído, endpoint roto, página no carga), NO hagas tests degradados. Reportalo como `CRITICAL BLOCKER: [prerequisito] falla — [N] tests bloqueados.`
+- **Un test que no puede verificar su hipótesis es un test FALLADO.** Si el test esperaba verificar que un modal se abre y el modal no existe, el test se marca ❌ con causa "ELEMENT NOT FOUND", no se reescribe con un assert laxo.
+- **Si el 30% o más de tus tests no pueden ejecutarse por un bloqueo externo**, detenete y reportá el CRITICAL BLOCKER. No entregues un suite degradado.
+
 ---
 
 ## Cuando eres llamado
