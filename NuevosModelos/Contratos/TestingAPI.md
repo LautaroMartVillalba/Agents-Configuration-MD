@@ -30,6 +30,14 @@ base_url: <string>
 auth:                                   # opcional
   type: bearer|basic|api_key|cookie
   token_env: <env-var-name>            # NUNCA inline
+criterios:                              # criterios de calidad del testing de API
+  contract: {required: boolean}            # respuesta matchea el schema esperado
+  status_codes: {required: boolean}        # HTTP status EXACTO, sin rangos tolerantes
+  auth: {required: boolean}                # autenticación y autorización correctas
+  validation: {required: boolean}          # validación de inputs (422, 400 según corresponda)
+  performance: {required: boolean}        # tiempo de respuesta < umbral
+  security: {required: boolean}           # headers de seguridad, CORS, rate limiting
+  idempotency: {required: boolean}        # operaciones idempotentes (GET, PUT, DELETE)
 ```
 
 ## OUTPUT

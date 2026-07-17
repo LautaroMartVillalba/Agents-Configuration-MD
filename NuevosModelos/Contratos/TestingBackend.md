@@ -23,6 +23,14 @@ detener_si_falla:
   nivel: continuar|stop_and_suite|stop_module|stop_all
   umbral_porcentaje: <int>              # default 30
 framework: autodetect|<nombre>           # autodetect default
+criterios:                              # criterios de calidad del testing backend
+  coverage: {required: boolean}            # cobertura de líneas/ramas/funciones
+  logic: {required: boolean}               # lógica de negocio correcta
+  edge_cases: {required: boolean}          # casos borde y boundary values
+  determinism: {required: boolean}         # asserts exactos OBLIGATORIOS, range-asserts PROHIBIDOS
+  setup_isolation: {required: boolean}     # tests independientes, sin shared state entre escenarios
+  performance: {required: boolean}        # tiempo de ejecución por test
+  database_integrity: {required: boolean} # estado de DB post-test (no side effects)
 ```
 
 ## OUTPUT
