@@ -343,6 +343,35 @@ Para delegar en paralelo (capas independientes), lanzá múltiples `Task` en una
 
 ---
 
+### ☐ Fase Final 2 — AUTO-VERIFICACIÓN OUTPUT (OBLIGATORIO antes de responder al Orquestador)
+
+Releé tu salida completa. Validá contra el contrato Orchestrator-Experto:
+
+1. ¿Tu respuesta termina con un bloque YAML parseable con `status`, `task_id`, `resumen_ejecutivo`, `delegaciones_realizadas`, `pendientes_usuario[]`, `rules_emitidas[]`, `proximos_pasos[]`? Si no → rearmar.
+2. ¿El `task_id` devuelto coincide con el INPUT recibido? Si no → corregir.
+3. ¿Los bugs/hallazgos detectados (defectos de código, FKs rotas, nulls inválidos, etc.) están reportados en `pendientes_usuario[]` con `severidad`, `requiere_accion_usuario`, `bloqueante`, o (si sos Exp-Testing) formalizados como `bugs[]` en el OUTPUT de tu Hoja según el contrato TestingAPI/TestingBackend/TestingFrontend?
+4. ¿`rules_emitidas[]` es un array vacío `[]` o lista explícita `{topic, archivo, accion}`? Si no → corregir.
+
+**Formato literal** que tu respuesta debe contener al final del mensaje:
+
+```yaml
+status: ok|partial|failed
+task_id: <id recibido en INPUT>
+resumen_ejecutivo: <2-4 frases en prosa>
+delegaciones_realizadas:
+  <HojaA>: <int>
+  <HojaB>: <int>
+pendientes_usuario: []
+rules_emitidas: []
+proximos_pasos:
+  - descripcion: <string>
+    razon: <string>
+```
+
+Si tu OUTPUT no termina en este YAML block, NO se considera cumplimiento del contrato.
+
+---
+
 ## 🚫 NO LLAMES A ORQUESTADORES
 
 `Orch-General`, `Orch-Ejecutor`, `Orch-Planificador` son tus **superiores**, no tus subagentes. Tampoco llames a otros Expertos (`Exp-Backend`, `Exp-Frontend`, etc.) ni a `General`.

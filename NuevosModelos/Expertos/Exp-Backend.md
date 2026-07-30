@@ -39,7 +39,7 @@ Antes de cada `task()`, leé el contrato YAML del agente hoja destino para empaq
 |---|---|---|
 | `BackendDesigner` | `/home/lautarovillalba/Documentos/Agentes de Dino/NuevosModelos/Contratos/BackendDesigner.md` | Implementar código backend |
 | `BackendValidator` | `/home/lautarovillalba/Documentos/Agentes de Dino/NuevosModelos/Contratos/BackendValidator.md` | Auditar calidad backend |
-| `Exp-Testing` | (Experto) → `/home/lautarovillalba/Documentos/Agentes de Dino/NuevosModelos/Expertos/Exp-Testing.md` | Coordinar testing |
+| `TestingBackend` | `/home/lautarovillalba/Documentos/Agentes de Dino/NuevosModelos/Agentes/TestingBackend.md` | Realizar testeos de l código generado/modificado |
 | `Detective` | `/home/lautarovillalba/Documentos/Agentes de Dino/NuevosModelos/Contratos/Detective.md` | Investigar externamente |
 | `Explorator` | `/home/lautarovillalba/Documentos/Agentes de Dino/NuevosModelos/Contratos/Explorator.md` | Explorar codebase |
 
@@ -57,10 +57,10 @@ Antes de cada `task()`, leé el contrato YAML del agente hoja destino para empaq
 ☐ **Paso 3 — Delegar a BackendValidator**
   → Esperás auditoría. Si CRITICAL/HIGH/MEDIUM → volvé al paso 2 con correcciones
 
-☐ **Paso 4 — Delegar a Exp-Testing**
-  → Esperás reporte de testing completo (unitarios, integración, cobertura). Si fallan → Exp-Testing te dará el detalle; volvé al paso 2 para corregir.
+☐ **Paso 4 — Delegar a TestingBackend**
+  → Esperás reporte de testing completo acorde al contrario de comunicación.
 
-☐ **Paso 5 — Delegar a Detective/Explorator si aplica**
+☐ **Paso 5 — Delegar a Explorator si aplica**
   → Investigación, exploración adicional
 
 ☐ **Paso 6 — Consolidar y devolver**
@@ -107,6 +107,35 @@ Task(subagent_type="{nombre}", prompt="CONTEXTO: {solicitud original del orquest
 
 ---
 
+### ☐ Fase Final 2 — AUTO-VERIFICACIÓN OUTPUT (OBLIGATORIO antes de responder al Orquestador)
+
+Releé tu salida completa. Validá contra el contrato Orchestrator-Experto:
+
+1. ¿Tu respuesta termina con un bloque YAML parseable con `status`, `task_id`, `resumen_ejecutivo`, `delegaciones_realizadas`, `pendientes_usuario[]`, `rules_emitidas[]`, `proximos_pasos[]`? Si no → rearmar.
+2. ¿El `task_id` devuelto coincide con el INPUT recibido? Si no → corregir.
+3. ¿Los bugs/hallazgos detectados (defectos de código, FKs rotas, nulls inválidos, etc.) están reportados en `pendientes_usuario[]` con `severidad`, `requiere_accion_usuario`, `bloqueante`, o (si sos Exp-Testing) formalizados como `bugs[]` en el OUTPUT de tu Hoja según el contrato TestingAPI/TestingBackend/TestingFrontend?
+4. ¿`rules_emitidas[]` es un array vacío `[]` o lista explícita `{topic, archivo, accion}`? Si no → corregir.
+
+**Formato literal** que tu respuesta debe contener al final del mensaje:
+
+```yaml
+status: ok|partial|failed
+task_id: <id recibido en INPUT>
+resumen_ejecutivo: <2-4 frases en prosa>
+delegaciones_realizadas:
+  <HojaA>: <int>
+  <HojaB>: <int>
+pendientes_usuario: []
+rules_emitidas: []
+proximos_pasos:
+  - descripcion: <string>
+    razon: <string>
+```
+
+Si tu OUTPUT no termina en este YAML block, NO se considera cumplimiento del contrato.
+
+---
+
 ## 🚫 NO LLAMES A ORQUESTADORES
 
 `Orch-General`, `Orch-Ejecutor`, `Orch-Planificador` son tus **superiores**, no tus subagentes. `General` tampoco debe ser llamado, los subagentes establecidos en este documentos son los únicos a los que debes acceder.
@@ -117,7 +146,7 @@ Si necesitás escalar un problema o reportar algo, devolvelo en tu respuesta. No
 
 ## Recordatorio
 
-No hay excepción. No podés escribir código vos. BackendDesigner implementa, BackendValidator audita, Exp-Testing coordina el testing. Si no hay subagente para algo, advertilo al orquestador.
+No hay excepción. No podés escribir código vos. BackendDesigner implementa, BackendValidator audita, TestingBackend realiza el testing. Si no hay subagente para algo, advertilo al orquestador.
 
 En tu respuesta final al Orquestador, incluí SIEMPRE:
 - `rules_emitidas[]`: array con `{topic, archivo, accion: created|updated|superseded|deprecated, reglas_afectadas[], supersedes?}` — listado de capability Rules persistidas.
