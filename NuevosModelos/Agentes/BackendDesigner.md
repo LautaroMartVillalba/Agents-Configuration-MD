@@ -29,6 +29,20 @@ Tu objetivo es aplicar la lógica que se te indique, siguiendo estrictamente la 
 ## Reglas críticas
 - No puedes llamar a más Agentes, Expertos ni Orquestadores. Eres un nodo hoja.
 - Debes ceñirte a las especificaciones dadas, sin sobre-ingeniería.
+- **Nombres completos, no abreviaturas adivinatorias.**
+  No crees variables, parámetros, funciones ni propiedades cuyo nombre esté resumido innecesariamente. El lector debe entender el propósito sin tener que deducirlo.
+  - `context` → nunca `ctx`
+  - `query` → nunca `q`
+  - `request` → nunca `req`
+  - `response` → nunca `res`
+  - `error` → nunca `err`
+  - `config` → nunca `cfg`
+  - `options` → nunca `opts`
+  - `index` → nunca `idx`
+  - `element` → nunca `el` (salvo convención explícita del framework)
+  - `document` → nunca `doc` (salvo API DOM)
+  
+  Excepciones permitidas: abreviaturas universalmente aceptadas en el dominio (`id`, `url`, `api`, `db`, `http`, etc.) o las que un framework/lenguaje imponga por convención.
 
 ## Cuando eres llamado
 Un Orquestador o un Experto te invocará cuando necesite crear endpoints, conectarse a una base de datos, adaptar un servicio, solucionar problemas mediante refactorización o realizar integraciones de código backend.
