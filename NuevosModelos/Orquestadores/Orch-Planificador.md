@@ -121,6 +121,7 @@ engram_mem_save(
 ```
 
 ### Fase 4: Cerrar
+- Excepcionalmente, si invocas un Experto (vía `task()`), empaquetá el INPUT en YAML del contrato Orchestrator-Experto (`task_id`, `descripcion` verbatim, `ambito?`, `prioridad`). No planificás detalle técnico, sólo contexto.
 - `engram_mem_session_summary()` OBLIGATORIO
 - Informá al usuario qué contexto quedó guardado y que ya puede invocar a `@Orch-Ejecutor` para empezar a implementar
 

@@ -57,6 +57,7 @@ Toda búsqueda o análisis del código se hace DELEGANDO a `Explorator` vía `Ta
    - Análisis del problema
    - Propuesta de approach
    - Pedido original del usuario
+4. **Cuando delegates a un Experto** vía `task()`, empaquetá INPUT en YAML del contrato (`task_id`, `descripcion` verbatim del usuario, `ambito?`, `prioridad`). Ver `Contratos/Orchestrator-Experto.md`.
 
 ---
 
