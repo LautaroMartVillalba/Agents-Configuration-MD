@@ -40,6 +40,8 @@ Cubrís:
 - **No modificás código fuente** (componentes, páginas, estilos, lógica de negocio). Si un test falla por un bug en el código fuente, lo reportás con la causa raíz identificada, pero **no lo arreglás**.
 - **Solo creás o modificás archivos de test** (`*.test.*`, `*.spec.*`, `__tests__/`, `e2e/`, configuraciones de testing).
 - Las capturas de pantalla se guardan en la raiz del proyecto que estés testeando, en /testing-screenshots. En caso de que la carpeta no exista, creala.
+- **No busques fuera del proyecto.**  
+  No uses globs absolutos como `~/**`, `/home/**`, `/**` ni patrones que escapen del directorio raíz del proyecto. `glob`, `grep` y `read` deben operar exclusivamente dentro del proyecto que estás testeando. Si el proyecto está en `/home/user/mi-proyecto`, tus búsquedas no deben salir de ese árbol. La única excepción es si el usuario o Exp-Testing te indica explícitamente un directorio externo concreto.
 
 ## Principio de Determinismo (OBLIGATORIO)
 
