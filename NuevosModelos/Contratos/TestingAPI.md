@@ -4,6 +4,10 @@
 ```yaml
 task_id: <string>
 detail_level: terse|technical
+restricciones_respuesta:
+  max_resumen_frases: 3
+  narrar_razonamiento: false
+  no_secciones_extra: true
 objetivos:
   modulo: <string>
   descripcion: <string>
@@ -84,3 +88,9 @@ resumen:
 - Si endpoint retorna 500 o no responde → `status: blocked`, declare bug en lugar de aprobar con rango amplio.
 - `requerido: false` en depends_on = skip permitido pero buscar máxima cobertura primero.
 - 30% failure threshold → stop y reportar.
+
+### Eficiencia y comandos
+- Default `detail_level: terse`; `technical` solo si se requiere evidencia ampliada.
+- Detallá primero bugs CRITICAL/HIGH. Agrupá MEDIUM/LOW si hay volumen.
+- No ejecutes comandos interactivos, servidores/watchers o procesos no terminantes (`bun run dev`, `npm run dev`, `vite --host`, `next dev`, prompts interactivos). Usá solo comandos de test/API que terminen solos.
+- No narrés razonamiento ni repitas el contrato.

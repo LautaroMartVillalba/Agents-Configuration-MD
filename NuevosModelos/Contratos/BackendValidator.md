@@ -4,6 +4,10 @@
 ```yaml
 task_id: <string>
 detail_level: terse|technical          # NO soporta semantic
+restricciones_respuesta:
+  max_resumen_frases: 3
+  narrar_razonamiento: false
+  no_secciones_extra: true
 archivos:                               # focaliza atención del validador
   - archivo: EjemploService             # nombre o path
       created:
@@ -54,3 +58,9 @@ resumen:
 ```
 
 **Mapeo status↔veredicto**: ok→APROBADO (sin CRIT ni HIGH) · warnings→APROBADO_CON_ALERTAS (0 CRIT) · rejected→REPROBADO (>0 CRIT o required:true no verificable).
+
+### Eficiencia
+- Default `detail_level: terse`; `technical` solo si se requiere evidencia ampliada.
+- Detallá primero CRITICAL/HIGH. Agrupá MEDIUM/LOW si hay volumen.
+- Evidencia breve y representativa: snippet mínimo, root_cause y recomendación de 1-2 frases.
+- No narrés razonamiento ni repitas el contrato.

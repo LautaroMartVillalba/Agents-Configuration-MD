@@ -4,6 +4,10 @@
 ```yaml
 task_id: <string>
 detail_level: terse|technical
+restricciones_respuesta:
+  max_resumen_frases: 3
+  narrar_razonamiento: false
+  no_secciones_extra: true
 objetivos:
   modulo: <string>
   descripcion: <string>
@@ -83,3 +87,9 @@ resumen:
 - asserts exactos sobre estado del DOM / visibilidad — `expect(modal.hidden).toBe(false)` sí; `expect([true,false]).toContain(modal.hidden)` PROHIBIDO.
 - Si página no carga / 404 / timeout → `status: blocked`, NO screenshot en blanco aprobado.
 - 30% failure threshold → stop y reportar.
+
+### Eficiencia y comandos
+- Default `detail_level: terse`; `technical` solo si se requiere evidencia ampliada.
+- Detallá primero bugs CRITICAL/HIGH. Agrupá MEDIUM/LOW si hay volumen.
+- No ejecutes comandos interactivos, servidores/watchers o procesos no terminantes (`bun run dev`, `npm run dev`, `vite --host`, `next dev`, prompts interactivos). Usá solo comandos de test/Playwright que terminen solos.
+- No narrés razonamiento ni repitas el contrato.

@@ -6,13 +6,17 @@ task_id: <string>                     # generado por Orquestador, propagado por 
 descripcion: <string>                 # TAREA del usuario en lenguaje natural, preservando intent + alcance
 ambito: [<string>, ...]               # sub-dominios semánticos (ej: "módulo companies") — opcional
 prioridad: CRITICA|ALTA|MEDIA|BAJA     # para que el Experto decida triage interno
+restricciones_respuesta:               # opcional — presupuesto de salida
+  max_resumen_frases: 8                # default Experto: 8
+  narrar_razonamiento: false           # no explicar cadena de pensamiento ni proceso interno
+  no_secciones_extra: true             # cumplir contrato sin secciones inventadas
 ```
 
 ## OUTPUT Experto → Orquestador
 ```yaml
 status: ok|partial|failed
 task_id: <string>
-resumen_ejecutivo: <string>            # prosa 2-4 frases — para que el Orquestador responda al humano naturalmente
+resumen_ejecutivo: <string>            # prosa precisa; máximo según restricciones_respuesta.max_resumen_frases
 delegaciones_realizadas:               # contador por agente hoja invocado
   BackendDesigner: <int>
   FrontendDesigner: <int>
@@ -47,6 +51,13 @@ proximos_pasos:                         # continuidad sugerida al Orquestador
    - si `bloqueante: true` → suspender ejecución y subir el pendiente al humano
    - si solo `requiere_accion_usuario: true` (no bloqueante) → avisar y seguir
 7. Si `proximos_pasos[]` no vacío → sugerir continuidad al usuario (sin forzar — la decisión de invocar otro Experto es del Orquestador, no del Experto que respondió).
+
+## Eficiencia de salida
+- Orquestadores: capa humana. Responder claro y breve; default `max_resumen_frases: 6` al usuario.
+- Expertos: pueden procesar en profundidad, pero reportan preciso para reducir inferencia del Orquestador; default `max_resumen_frases: 8`.
+- Hojas: reciben qué hacer, lo hacen y reportan; default `max_resumen_frases: 3`.
+- Todo agente debe cumplir su contrato sin narrar razonamiento ni repetir el contrato.
+- `proximos_pasos[]`: máximo 3 items, cada uno con `descripcion` y `razon` compactas.
 
 ## Variantes por Orquestador
 - **Orch-Ejecutor**: ante `status: failed` del Experto → decide reintento con `descripcion` aumentada, o sube al humano. Libre de planificar.

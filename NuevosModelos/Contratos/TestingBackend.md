@@ -4,6 +4,10 @@
 ```yaml
 task_id: <string>
 detail_level: terse|technical
+restricciones_respuesta:
+  max_resumen_frases: 3
+  narrar_razonamiento: false
+  no_secciones_extra: true
 objetivos:
   modulo: <string>                     # ej: companies, auth
   descripcion: <string>                # 1-2 frases
@@ -75,3 +79,9 @@ resumen:
 - Si prereq roto (setup falla, DB no levanta, fixture missing) → `status: blocked`, NO swallow test con asserts tolerantes.
 - No hardcodear IDs mágicos para dodgear bugs que sí existen.
 - 30% failure threshold → stop suite/module/all y reportar.
+
+### Eficiencia y comandos
+- Default `detail_level: terse`; `technical` solo si se requiere evidencia ampliada.
+- Detallá primero bugs CRITICAL/HIGH. Agrupá MEDIUM/LOW si hay volumen.
+- No ejecutes comandos interactivos, servidores/watchers o procesos no terminantes (`bun run dev`, `npm run dev`, `vite --host`, `next dev`, prompts interactivos). Usá solo comandos de test que terminen solos.
+- No narrés razonamiento ni repitas el contrato.

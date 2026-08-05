@@ -4,6 +4,10 @@
 ```yaml
 task_id: <string>
 detail_level: terse|technical          # NO soporta semantic
+restricciones_respuesta:
+  max_resumen_frases: 3
+  narrar_razonamiento: false
+  no_secciones_extra: true
 goal:
   action: CREATE|EDIT|REFACTOR|DELETE|MIGRATE|INTEGRATE
   target: <path o componente>          # ej: /src/components/companies/, CompanyCard.tsx
@@ -100,3 +104,5 @@ pendientes:
 - `design_tokens.fuente` enum `archivo|url` — sin `inline`.
 - `eventos.tipo` default enum onClick|onChange|onSubmit|onHover|onFocus|onBlur|onKeyDown, ABIERTO si ninguno encaja.
 - `componentes_relacionados` array de objetos `{fuente: {path, relacion}}` — relación cualitativa breve.
+- Default `detail_level: terse`. Usar `technical` solo si el Experto pide evidencia o detalle técnico explícito.
+- Hoja pragmática: recibís qué hacer, lo hacés y reportás en el OUTPUT; no narrás razonamiento ni repetís el contrato.

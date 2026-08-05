@@ -4,6 +4,10 @@
 ```yaml
 task_id: <string>
 detail_level: terse|technical          # NO soporta semantic
+restricciones_respuesta:
+  max_resumen_frases: 3
+  narrar_razonamiento: false
+  no_secciones_extra: true
 url: <string>                          # OBLIGATORIO, sin esto aborta status:failed
 viewports:
   - {width: 1920, height: 1080, label: desktop}
@@ -66,3 +70,9 @@ resumen:
     responsive: <bool>
     accessibility: <bool>
 ```
+
+### Eficiencia
+- Default `detail_level: terse`; `technical` solo si se requiere evidencia ampliada.
+- Detallá primero CRITICAL/HIGH. Agrupá MEDIUM/LOW si hay volumen.
+- Evidencia breve y representativa: captura/snippet mínimo, root_cause y recomendación de 1-2 frases.
+- No narrés razonamiento ni repitas el contrato.

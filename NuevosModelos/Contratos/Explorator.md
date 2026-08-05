@@ -4,6 +4,10 @@
 ```yaml
 task_id: <string>
 detail_level: terse|technical|semantic       # ÚNICO que soporta semantic (junto Detective)
+restricciones_respuesta:
+  max_resumen_frases: 3
+  narrar_razonamiento: false
+  no_secciones_extra: true
 operation:
   type: buscar_endpoints|trazar_flujo|inventariar_modulo|buscar_referencias|comparar_patrones|identificar_dead_code|mapear_dependencias|ubicar_slot|extraer_contrato
   module:
@@ -50,3 +54,5 @@ summary: <string>                       # SOLO si detail_level=semantic — pros
 - `operation.type` es enum ABIERTO a agregaciones nuevas (no cerrado).
 - `detail_level: semantic` añade `summary` en prosa al final del output.
 - `mapa` sub-llaves: enum cerrado `controllers|services|repositories|models|config|routers|handlers|hooks|utils|types|otros`.
+- Default `detail_level: terse`. Usar `semantic` solo si el llamante necesita explicación humana.
+- Evidencia breve y representativa: máximo snippets necesarios para ubicar/trazar; no narrar razonamiento ni repetir el contrato.
